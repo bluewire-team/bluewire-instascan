@@ -1,4 +1,4 @@
-# ![Instascan](https://raw.githubusercontent.com/schmich/instascan/master/assets/qr.png) Instascan
+# ![BluewireScan](https://raw.githubusercontent.com/schmich/instascan/master/assets/qr.png) BluewireScan
 
 ## Installing
 
@@ -9,7 +9,7 @@
 `npm install --save bluewire-instascan`
 
 ```javascript
-const Instascan = require('instascan');
+const BluewireScan = require('bluewire-instascan');
 ```
 
 ### Support
@@ -17,27 +17,22 @@ const Instascan = require('instascan');
 Pending. [Drop a note](https://github.com/bluewire-team/bluewire-instascan/issues) if you need Bower support.
 
 
-```html
-<script type="text/javascript" src="instascan.min.js"></script>
-```
-
 ## Example
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Instascan</title>
-    <script type="text/javascript" src="instascan.min.js"></script>
+    <title>BluewireScan</title>
   </head>
   <body>
     <video id="preview"></video>
     <script type="text/javascript">
-      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      let scanner = new BluewireScan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
         console.log(content);
       });
-      Instascan.Camera.getCameras().then(function (cameras) {
+      BluewireScan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
           scanner.start(cameras[0]);
         } else {
@@ -53,7 +48,7 @@ Pending. [Drop a note](https://github.com/bluewire-team/bluewire-instascan/issue
 
 ## API
 
-### let scanner = new Instascan.Scanner(opts)
+### let scanner = new BluewireScan.Scanner(opts)
 
 Create a new scanner with options:
 
@@ -95,11 +90,11 @@ let opts = {
 
 - Activate `camera` and start scanning using it as the source. Returns promise.
 - This must be called in order to use [`scanner.scan`](#let-result--scannerscan) or receive [`scan`](#scanneraddlistenerscan-callback) events.
-- `camera`: Instance of `Instascan.Camera` from [`Instascan.Camera.getCameras`](#instascancameragetcameras).
+- `camera`: Instance of `BluewireScan.Camera` from [`BluewireScan.Camera.getCameras`](#instascancameragetcameras).
 - `.then(function () { ... })`: called when camera is active and scanning has started.
 - `.catch(function (err) { ... })`
   - Called when an error occurs trying to initialize the camera for scanning.
-  - `err`: An `Instascan.MediaError` in the case of a known `getUserMedia` failure ([see error types](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Errors)).
+  - `err`: An `BluewireScan.MediaError` in the case of a known `getUserMedia` failure ([see error types](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Errors)).
   
 ### scanner.stop()
 
@@ -133,15 +128,15 @@ let opts = {
 - If `opts.video` element was specified, it will have the `inactive` CSS class.
 - `callback`: `function ()`
 
-### Instascan.Camera.getCameras()
+### BluewireScan.Camera.getCameras()
 
 - Enumerate available video devices. Returns promise.
 - `.then(function (cameras) { ... })`
   - Called when cameras are available.
-  - `cameras`: Array of `Instascan.Camera` instances available for use.
+  - `cameras`: Array of `BluewireScan.Camera` instances available for use.
 - `.catch(function (err) { ... })`
   - Called when an error occurs while getting cameras.
-  - `err`: An `Instascan.MediaError` in the case of a known `getUserMedia` failure ([see error types](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Errors)).
+  - `err`: An `BluewireScan.MediaError` in the case of a known `getUserMedia` failure ([see error types](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Errors)).
 
 ### camera.id
 
@@ -159,7 +154,7 @@ BlueWire Instascan works in [any browser that supports the WebRTC/getUserMedia A
 
 ## Performance
 
-Many factors affect how quickly and reliably Instascan can detect QR codes.
+Many factors affect how quickly and reliably BluewireScan can detect QR codes.
 
 If you control creation of the QR code, consider the following:
 
